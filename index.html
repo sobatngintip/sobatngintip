@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jastip Sobat Ngintip</title>
+    
+    <!-- BARIS INI YANG MENYAMBUNGKAN HTML DENGAN FILE CSS KAMU -->
+    <link rel="stylesheet" href="sobat.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- ================= HEADER APLIKASI ================= -->
+    <div class="header-color">
+        <img src="logosn.png" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+        <div class="header-text">
+            <h1><span class="text-green">SOBAT</span> <span class="text-orange">NGINTIP</span></h1>
+            <p>O P E N  J A S T I P</p>
+        </div>
+    </div>
+
+    <!-- ================= AREA HALAMAN ================= -->
+    <div class="content-area">
+
+        <!-- HALAMAN 1: COVER -->
+        <div id="page1" class="page active">
+            <img src="postersn.png" alt="Promo" class="cover-img" onerror="this.style.display='none'">
+            <h2>Solusi Titip Jajanmu!</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 30px; font-size: 14px;">Pesan jajan favoritmu sekarang dengan mudah dan cepat melalui form ini.</p>
+            <button class="btn btn-primary" onclick="goToPage(2)">Order Sekarang ➔</button>
+
+            <!-- KEUNGGULAN -->
+            <div class="fitur-grid">
+                <div class="fitur-item"><span>🚚</span><p>Antar Cepat</p></div>
+                <div class="fitur-item"><span>🌿</span><p>Selalu Fresh</p></div>
+                <div class="fitur-item"><span>💰</span><p>Harga Bersahabat</p></div>
+            </div>
+
+            <!-- CARA PESAN -->
+            <div class="info-card">
+                <h3>Cara Pesan</h3>
+                <div class="langkah"><b>1</b> Isi data diri & pilih menu</div>
+                <div class="langkah"><b>2</b> Bayar via QRIS / transfer</div>
+                <div class="langkah"><b>3</b> Kirim bukti ke WhatsApp, jajan diantar!</div>
+            </div>
+
+            <!-- TESTIMONI -->
+            <div class="info-card testi">
+                <p class="testi-teks">"Kue talamnya lembut, durennya terasa banget!"</p>
+                <p class="testi-nama">— Bu Haji Rina, Tegal ⭐⭐⭐⭐⭐</p>
+            </div>
+        </div>
+
+        <!-- HALAMAN 2: ALAMAT -->
+        <div id="page2" class="page">
+            <button class="btn-back" onclick="goToPage(1)">← Kembali</button>
+            <h2>Data Customer</h2>
+            <div class="form-group"><label>Nama Lengkap</label><input type="text" id="inpNama"></div>
+            <div class="form-group"><label>Nomor WhatsApp</label><input type="tel" id="inpWA"></div>
+            <div class="form-group"><label>Desa / Kelurahan</label><input type="text" id="inpDesa"></div>
+            <div class="form-group"><label>Kecamatan</label><input type="text" id="inpKec"></div>
+            <div class="form-group"><label>Kabupaten / Kota</label><input type="text" id="inpKota"></div>
+            <button class="btn btn-primary" style="margin-top:20px;" onclick="validasiDataDiri()">Lanjut Pilih Menu ➔</button>
+        </div>
+
+        <!-- HALAMAN 3: PILIH KATEGORI -->
+        <div id="page3" class="page">
+            <button class="btn-back" onclick="goToPage(2)">← Kembali</button>
+            <h2>Mau titip apa hari ini?</h2>
+            <button class="btn" onclick="bukaKatalogKueTalam()">Kue Talam </button>
+            <button class="btn" style="background-color: #eee; color: #999; border-color:#eee;" disabled>Sewa Digicam (Cooming soon)</button>
+            <button class="btn" style="background-color: #eee; color: #999; border-color:#eee;" disabled>Lapis Kukus Lawang Sewu (Cooming Soon)</button>
+        </div>
+
+        <!-- HALAMAN 4: KATALOG MENU -->
+        <div id="page4" class="page">
+            <button class="btn-back" onclick="goToPage(3)">← Pilih Jastip Lain</button>
+            <h2>Katalog Kue Talam</h2>
+            <div id="menuContainer"></div>
+            <div class="sticky-bottom">
+                <div>
+                    <p>Total Belanja (<span id="cartCount">0</span> item)</p>
+                    <h3 id="cartTotal">Rp 0</h3>
+                </div>
+                <button class="btn btn-primary" onclick="lanjutKeRingkasan()">Lanjut ➔</button>
+            </div>
+        </div>
+
+        <!-- HALAMAN 5: RINGKASAN -->
+        <div id="page5" class="page">
+            <button class="btn-back" onclick="goToPage(4)">← Tambah Barang Lain</button>
+            <h2>Ringkasan Pesanan</h2>
+
+            <!-- KOTAK PROMO DISKON ONGKIR -->
+            <div style="background: #e0f7fa; padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #b2ebf2;">
+                <h4 style="margin: 0 0 10px 0; color: #00838f;">🎉 SPESIAL PROMO OPENING! 🎉</h4>
+                <p style="font-size: 13px; margin: 0 0 8px 0; color: #006064;">Dapatkan <strong>Potongan Ongkir Rp 10.000</strong>.</p>
+                <p style="font-size: 11px; margin: 0 0 10px 0; color: #006064;">
+                    <strong>Syarat & Ketentuan:</strong><br> 
+                    - Follow Instagram dan TikTok kami di @sobat.ngintip.<br>
+                    - Upload story dan tag @sobat.ngintip selama 24 jam.<br>
+                    - Promo hanya berlaku untuk pemesanan sebelum tanggal 10. Pemesanan setelah tanggal 10 dianggap hangus.
+                </p>
+                <label style="font-size: 12px; display: flex; align-items: start; gap: 8px; color: #00838f; font-weight: bold; cursor: pointer;">
+                    <input type="checkbox" id="chkDiskon" onchange="hitungDiskon()" style="min-width: 20px; height: 20px; margin-top: 2px;">
+                    Bersedia follow Instagram dan TikTok @sobat.ngintip, serta upload story dan tag @sobat.ngintip selama 24 jam untuk klaim diskon ongkir Rp 10.000.
+                </label>
+            </div>
+
+            <div class="invoice-box">
+                <div style="margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px;" id="listPesananInvoice"></div>
+                <div class="invoice-row"><span>Subtotal Barang</span><strong id="invSubtotal">Rp 0</strong></div>
+                <div class="invoice-row"><span>Total Item Titipan</span><strong id="invJmlItem">0 Barang</strong></div>
+                <div class="invoice-row" style="color: #0984e3;"><span>Total Ongkir / Jastip</span><strong id="invJastip">Rp 0</strong></div>
+                
+                <!-- BARIS DISKON ONGKIR (Awalnya disembunyikan) -->
+                <div class="invoice-row" id="invDiskonRow" style="color: #27ae60; display: none;">
+                    <span>Diskon Ongkir</span><strong id="invDiskon">- Rp 0</strong>
+                </div>
+
+                <div class="invoice-total"><span>TOTAL BAYAR</span><span id="invGrandTotal">Rp 0</span></div>
+            </div>
+            <button class="btn btn-primary" onclick="lanjutKePembayaran()">Pilih Metode Pembayaran ➔</button>
+        </div>
+
+        <!-- HALAMAN 6: PEMBAYARAN -->
+        <div id="page6" class="page">
+            <button class="btn-back" onclick="goToPage(5)">← Kembali ke Rincian</button>
+            <h2>Instruksi Pembayaran</h2>
+            <div class="payment-highlight">
+                <p>Total yang harus dibayar:</p>
+                <h2 id="payAmmount">Rp 0</h2>
+            </div>
+
+            <div class="payment-card">
+                <h3>🔹 Scan QRIS</h3>
+                <img src="qrissn.jpeg" alt="QRIS Jastip" class="qris-img" onerror="this.src='https://via.placeholder.com/250x250?text=QRIS+Belum+Ada'">
+            </div>
+
+            <div class="payment-card">
+                <h3>🔹 Transfer Bank</h3>
+                <div class="bank-info">
+                    <div class="bank-details">
+                        <p><strong>Bank BNI</strong></p>
+                        <p class="rek" id="rekBNI">1845893813</p>
+                        <p>a.n MUHAMMAD IHSAN AL FARISI</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyRekening('rekBNI')">Salin</button>
+                </div>
+                <div class="bank-info">
+                    <div class="bank-details">
+                        <p><strong>SEA BANK</strong></p>
+                        <p class="rek" id="rekSea">901169975494</p>
+                        <p>a.n MUHAMMAD IHSAN AL FARISI</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyRekening('rekSea')">Salin</button>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="goToPage(7)">Saya Sudah Bayar ➔</button>
+        </div>
+
+        <!-- HALAMAN 7: KONFIRMASI (WA) -->
+        <div id="page7" class="page">
+            <div class="success-icon">🎉</div>
+            <h2>Pesanan Siap Diproses!</h2>
+            <p style="text-align: center; color: #555; margin-bottom: 30px;">Jangan lupa kirimkan <strong>Bukti Transfer</strong> beserta detail pesananmu ke WhatsApp Mintip ya.</p>
+            <button class="btn btn-wa btn-primary" onclick="kirimKeWA()">Kirim Bukti ke WhatsApp ➔</button>
+            <button class="btn-back" style="width: 100%; text-align: center; margin-top: 15px;" onclick="goToPage(1)">Kembali ke Awal</button>
+        </div>
+    </div>
+
+    <!-- ================= FOOTER APLIKASI ================= -->
+    <div class="footer-color">
+        <h2><span class="text-green">SOBAT</span> <span class="text-orange">NGINTIP</span></h2>
+        <p>SOlusi untuk Bantu Anda Terus yang iNGIN tiTIP</p>
+    </div>
+
+</div>
+
+<!-- =========================================
+     LOGIKA JAVASCRIPT
+     ========================================= -->
+<script>
+    const menuKueTalam = [
+        { id: "t1", nama: "Talam Full Durian isi 10", hargaAsli: 25000 },
+        { id: "t2", nama: "Talam Full Ubi Ungu isi 10", hargaAsli: 25000 },
+        { id: "t3", nama: "Talam Full Jagung isi 10", hargaAsli: 25000 },
+        { id: "t4", nama: "Talam Mix Durian Ubi isi 10", hargaAsli: 25000 },
+        { id: "t5", nama: "Talam Mix Durian Jagung isi 10", hargaAsli: 25000 },
+        { id: "t6", nama: "Talam Mix Jagung Ubi isi 10", hargaAsli: 25000 },
+        { id: "t7", nama: "Talam Full Jagung isi 25", hargaAsli: 50000 },
+        { id: "t8", nama: "Talam Full Ubi Ungu isi 25", hargaAsli: 55000 },
+        { id: "t9", nama: "Talam Full Durian isi 25", hargaAsli: 55000 },
+        { id: "t10", nama: "Talam Jagung mix Ubi Ungu isi 25", hargaAsli: 55000 },
+        { id: "t11", nama: "Talam Jagung mix Durian isi 25", hargaAsli: 53000 },
+        { id: "t12", nama: "Talam Ubi Ungu mix Durian isi 25", hargaAsli: 55000 },
+        { id: "t13", nama: "Talam mix 3 rasa (Durian, Jagung, Ubi ungu) isi 25", hargaAsli: 53000 },
+        { id: "t14", nama: "Ketan Kinca Durian", hargaAsli: 22000 },
+        { id: "t15", nama: "Singkong Thai Pack", hargaAsli: 16000 },
+        { id: "t16", nama: "Durian lumer", hargaAsli: 10000 },
+        { id: "t17", nama: "Ubi ungu lumer", hargaAsli: 10000 },
+        { id: "t18", nama: "Sum-sum", hargaAsli: 7000 }
+    ];
+    
+
+    let dataPembeli = {};
+    let keranjang = {}; 
+    let infoTotal = { subtotal: 0, totalItem: 0, biayaJastip: 0, diskon: 0, grandTotalAkhir: 0 };
+
+    function rp(angka) { return "Rp " + angka.toLocaleString('id-ID'); }
+
+    function goToPage(pageNumber) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page' + pageNumber).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+    }
+
+    function validasiDataDiri() {
+        dataPembeli = {
+            nama: document.getElementById('inpNama').value,
+            wa: document.getElementById('inpWA').value,
+            desa: document.getElementById('inpDesa').value,
+            kec: document.getElementById('inpKec').value,
+            kota: document.getElementById('inpKota').value
+        };
+        if(!dataPembeli.nama || !dataPembeli.wa || !dataPembeli.desa || !dataPembeli.kec || !dataPembeli.kota) {
+            alert("Harap lengkapi semua data ya!");
+            return;
+        }
+        goToPage(3);
+    }
+
+    // FUNGSI PINTAR UNTUK MENENTUKAN HARGA JUAL BERDASARKAN HARGA ASLI
+    function getHargaJual(hargaAsli) {
+        if (hargaAsli === 7000) return 12000;
+        if (hargaAsli === 10000) return 20000;
+        if (hargaAsli >= 50000) return hargaAsli + 15000;
+        return hargaAsli + 10000; // Harga default lainnya (naik 10k)
+    }
+
+    function bukaKatalogKueTalam() {
+        const container = document.getElementById('menuContainer');
+        container.innerHTML = ""; 
+        menuKueTalam.forEach(menu => {
+            const hargaTampil = getHargaJual(menu.hargaAsli);
+            
+            const qty = keranjang[menu.id] || 0;
+            const div = document.createElement('div');
+            div.className = 'menu-item';
+            div.innerHTML = `
+                <div class="menu-info">
+                    <h4>${menu.nama}</h4>
+                    <p>${rp(hargaTampil)}</p>
+                </div>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="ubahQty('${menu.id}', -1)">-</button>
+                    <input type="text" class="qty-input" id="qty-${menu.id}" value="${qty}" readonly>
+                    <button class="qty-btn" onclick="ubahQty('${menu.id}', 1)">+</button>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+        hitungKeranjang();
+        goToPage(4);
+    }
+
+    function ubahQty(id, perubahan) {
+        let qtySekarang = keranjang[id] || 0;
+        qtySekarang += perubahan;
+        if (qtySekarang < 0) qtySekarang = 0; 
+        keranjang[id] = qtySekarang;
+        document.getElementById(`qty-${id}`).value = qtySekarang;
+        hitungKeranjang();
+    }
+
+    function hitungKeranjang() {
+        let subtotal = 0, totalItem = 0;
+        
+        // 1. Hitung dulu Subtotal Barang
+        menuKueTalam.forEach(menu => {
+            const qty = keranjang[menu.id] || 0;
+            if (qty > 0) {
+                const hargaTampil = getHargaJual(menu.hargaAsli);
+                subtotal += (hargaTampil * qty);
+                totalItem += qty;
+            }
+        });
+        
+        // 2. LOGIKA ONGKIR 3 TINGKAT BARU
+        let totalOngkir = 0;
+        if (subtotal > 0 && subtotal <= 20000) {
+            totalOngkir = 10000;
+        } else if (subtotal > 20000 && subtotal <= 50000) {
+            totalOngkir = 15000;
+        } else if (subtotal > 50000) {
+            totalOngkir = 20000;
+        }
+        
+        infoTotal.subtotal = subtotal;
+        infoTotal.totalItem = totalItem;
+        infoTotal.biayaJastip = totalOngkir;
+
+        document.getElementById('cartCount').innerText = totalItem;
+        document.getElementById('cartTotal').innerText = rp(infoTotal.subtotal);
+    }
+
+    function hitungDiskon() {
+        const isDiskon = document.getElementById('chkDiskon').checked;
+        
+        if (isDiskon) {
+            // Diskon Rp 10.000 (maksimal memotong ongkir agar tidak jadi minus)
+            infoTotal.diskon = (infoTotal.biayaJastip >= 10000) ? 10000 : infoTotal.biayaJastip; 
+        } else {
+            infoTotal.diskon = 0;
+        }
+        
+        infoTotal.grandTotalAkhir = infoTotal.subtotal + infoTotal.biayaJastip - infoTotal.diskon;
+
+        document.getElementById('invDiskonRow').style.display = isDiskon ? 'flex' : 'none';
+        document.getElementById('invDiskon').innerText = "- " + rp(infoTotal.diskon);
+        document.getElementById('invGrandTotal').innerText = rp(infoTotal.grandTotalAkhir);
+    }
+
+    function lanjutKeRingkasan() {
+        if (infoTotal.totalItem === 0) {
+            alert("Keranjang masih kosong!"); return;
+        }
+
+        // Tiap masuk ringkasan, reset centang promo
+        document.getElementById('chkDiskon').checked = false;
+        infoTotal.diskon = 0;
+        infoTotal.grandTotalAkhir = infoTotal.subtotal + infoTotal.biayaJastip;
+        document.getElementById('invDiskonRow').style.display = 'none';
+
+        const listDiv = document.getElementById('listPesananInvoice');
+        listDiv.innerHTML = "";
+        
+        menuKueTalam.forEach(menu => {
+            const qty = keranjang[menu.id] || 0;
+            if (qty > 0) {
+                const hargaTampil = getHargaJual(menu.hargaAsli);
+                const totalHargaItem = hargaTampil * qty;
+                
+                listDiv.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:13px;">
+                        <span>${qty}x ${menu.nama}</span>
+                        <span>${rp(totalHargaItem)}</span>
+                    </div>
+                `;
+            }
+        });
+
+        document.getElementById('invSubtotal').innerText = rp(infoTotal.subtotal);
+        document.getElementById('invJmlItem').innerText = `${infoTotal.totalItem} Item`;
+        document.getElementById('invJastip').innerText = rp(infoTotal.biayaJastip);
+        document.getElementById('invGrandTotal').innerText = rp(infoTotal.grandTotalAkhir);
+        goToPage(5);
+    }
+
+    function lanjutKePembayaran() {
+        document.getElementById('payAmmount').innerText = rp(infoTotal.grandTotalAkhir);
+        goToPage(6);
+    }
+
+    function copyRekening(elementId) {
+        var textToCopy = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => { alert("Disalin: " + textToCopy); });
+    }
+
+    function kirimKeWA() {
+        let statusPromo = document.getElementById('chkDiskon').checked ? "*(Klaim Promo Diskon Ongkir Rp 10.000)*" : "";
+        let pesan = `Halo Min Tip, saya sudah transfer untuk pesanan Jastip ${statusPromo}:\n\n`;
+        pesan += `*-- DATA PEMBELI --*\nNama: ${dataPembeli.nama}\nWA: ${dataPembeli.wa}\nAlamat: Ds. ${dataPembeli.desa}, Kec. ${dataPembeli.kec}, Kota ${dataPembeli.kota}\n\n`;
+        pesan += `*-- RINCIAN PESANAN --*\n`;
+        
+        let teksRincianPesanan = ""; 
+        menuKueTalam.forEach(menu => {
+            const qty = keranjang[menu.id] || 0;
+            if (qty > 0) {
+                const hargaTampil = getHargaJual(menu.hargaAsli);
+                
+                pesan += `- ${qty}x ${menu.nama} (@${rp(hargaTampil)})\n`;
+                teksRincianPesanan += `${qty}x ${menu.nama}, `;
+            }
+        });
+
+        // Menambahkan rincian ongkir secara keseluruhan di bawah list barang
+        pesan += `\nTotal Barang: ${rp(infoTotal.subtotal)}`;
+        pesan += `\nOngkir Keseluruhan: ${rp(infoTotal.biayaJastip)}`;
+
+        if (infoTotal.diskon > 0) {
+            pesan += `\nDiskon Ongkir: - ${rp(infoTotal.diskon)}`;
+            teksRincianPesanan += " (Klaim Diskon Ongkir Rp 10.000)";
+        }
+
+        pesan += `\n\n*TOTAL TRANSFER: ${rp(infoTotal.grandTotalAkhir)}*\n\n*Berikut saya lampirkan bukti transfernya ya.*`;
+
+        // ==============================================================
+        // BAGIAN 1: PENGIRIMAN KE GOOGLE SHEETS MENGGUNAKAN FORMDATA
+        // ==============================================================
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzt8J7S3MVL91oWHN2WaudOSCmTeN0IvrTcFWxt4PaHwhFOCzb07J9t1EU1-nPPfzAQ/exec';
+
+        const formData = new FormData();
+        formData.append("nama", dataPembeli.nama);
+        formData.append("wa", dataPembeli.wa);
+        formData.append("alamat", `Ds. ${dataPembeli.desa}, Kec. ${dataPembeli.kec}, ${dataPembeli.kota}`);
+        formData.append("pesanan", teksRincianPesanan);
+        formData.append("total", rp(infoTotal.grandTotalAkhir));
+
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: formData,
+            mode: 'no-cors'
+        }).catch(error => console.error('Gagal kirim ke Sheet', error));
+
+        // ==============================================================
+        // BAGIAN 2: PENGIRIMAN KE WHATSAPP 
+        // ==============================================================
+        const nomorWA = "6285137957302"; // Masukkan nomor WhatsApp kamu di sini 
+        
+        const urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+        window.open(urlWA, '_blank');
+    }
+</script>
+
+</body>
+</html>
